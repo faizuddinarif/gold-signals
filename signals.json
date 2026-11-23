@@ -1,6 +1,22 @@
 {
- "last_ts": "2026-11-23T10:50:00-05:00",
- "trade": null,
+ "last_ts": "2026-11-23T11:55:00-05:00",
+ "trade": {
+  "dir": 1,
+  "stage": 0,
+  "entry": 3672.60009765625,
+  "sl": 3663.471968684206,
+  "tp1": 3680.2068717996203,
+  "tp2": 3687.81364594299,
+  "tp3": 3695.4204200863605,
+  "score": 8.5,
+  "grade": "A",
+  "atrRatio": 0.934572461193898,
+  "rr": 2.5,
+  "time": "2026-11-23 11:55 EST",
+  "id": 3,
+  "sl0": 3663.471968684206,
+  "opened": "2026-11-23T11:55:00-05:00"
+ },
  "history": [
   {
    "dir": 1,
@@ -43,16 +59,16 @@
    "r": 0.83
   }
  ],
- "counter": 2,
+ "counter": 3,
  "snapshot": {
-  "updated": "2026-11-23T10:50:00-05:00",
+  "updated": "2026-11-23T11:55:00-05:00",
   "label": "XAUUSD 5m",
   "preset": "Scalping",
-  "price": 3668.300048828125,
+  "price": 3672.60009765625,
   "trend": "Bullish",
   "score": 8.5,
   "grade": "A",
-  "status": "No Trade",
+  "status": "Active",
   "factors": [
    {
     "name": "Trend (EMA)",
@@ -70,12 +86,12 @@
     "pts": 1
    },
    {
-    "name": "RSI 54.9",
+    "name": "RSI 55.8",
     "ok": true,
     "pts": 1
    },
    {
-    "name": "ADX 28.2",
+    "name": "ADX 21.9",
     "ok": true,
     "pts": 1.5
    },
