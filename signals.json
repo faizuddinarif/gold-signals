@@ -1,15 +1,36 @@
 {
- "last_ts": "2026-11-23T03:00:00-05:00",
+ "last_ts": "2026-11-23T04:25:00-05:00",
  "trade": null,
- "history": [],
- "counter": 0,
+ "history": [
+  {
+   "dir": 1,
+   "stage": 0,
+   "entry": 3623.800048828125,
+   "sl": 3617.477407620937,
+   "tp1": 3629.0689165007816,
+   "tp2": 3634.337784173438,
+   "tp3": 3639.606651846095,
+   "score": 8.0,
+   "grade": "A",
+   "atrRatio": 0.976701985690425,
+   "rr": 2.5,
+   "time": "2026-11-23 04:15 EST",
+   "id": 1,
+   "sl0": 3617.477407620937,
+   "opened": "2026-11-23T04:15:00-05:00",
+   "closed": "2026-11-23T04:20:00-05:00",
+   "result": "SL",
+   "r": -1.0
+  }
+ ],
+ "counter": 1,
  "snapshot": {
-  "updated": "2026-11-23T03:00:00-05:00",
+  "updated": "2026-11-23T04:25:00-05:00",
   "label": "XAUUSD 5m",
   "preset": "Scalping",
-  "price": 3609.300048828125,
-  "trend": "Bearish",
-  "score": 10.0,
+  "price": 3620.0,
+  "trend": "Bullish",
+  "score": 8.0,
   "grade": "A",
   "status": "No Trade",
   "factors": [
@@ -20,7 +41,7 @@
    },
    {
     "name": "Higher-TF bias",
-    "ok": true,
+    "ok": false,
     "pts": 2
    },
    {
@@ -29,12 +50,12 @@
     "pts": 1
    },
    {
-    "name": "RSI 35.3",
+    "name": "RSI 55.6",
     "ok": true,
     "pts": 1
    },
    {
-    "name": "ADX 26.8",
+    "name": "ADX 21.9",
     "ok": true,
     "pts": 1.5
    },
