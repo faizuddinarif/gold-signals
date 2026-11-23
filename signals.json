@@ -1,22 +1,6 @@
 {
- "last_ts": "2026-11-23T11:55:00-05:00",
- "trade": {
-  "dir": 1,
-  "stage": 0,
-  "entry": 3672.60009765625,
-  "sl": 3663.471968684206,
-  "tp1": 3680.2068717996203,
-  "tp2": 3687.81364594299,
-  "tp3": 3695.4204200863605,
-  "score": 8.5,
-  "grade": "A",
-  "atrRatio": 0.934572461193898,
-  "rr": 2.5,
-  "time": "2026-11-23 11:55 EST",
-  "id": 3,
-  "sl0": 3663.471968684206,
-  "opened": "2026-11-23T11:55:00-05:00"
- },
+ "last_ts": "2026-11-23T12:50:00-05:00",
+ "trade": null,
  "history": [
   {
    "dir": 1,
@@ -57,18 +41,38 @@
    "closed": "2026-11-23T08:30:00-05:00",
    "result": "TP1 locked",
    "r": 0.83
+  },
+  {
+   "dir": 1,
+   "stage": 0,
+   "entry": 3672.60009765625,
+   "sl": 3663.471968684206,
+   "tp1": 3680.2068717996203,
+   "tp2": 3687.81364594299,
+   "tp3": 3695.4204200863605,
+   "score": 8.5,
+   "grade": "A",
+   "atrRatio": 0.934572461193898,
+   "rr": 2.5,
+   "time": "2026-11-23 11:55 EST",
+   "id": 3,
+   "sl0": 3663.471968684206,
+   "opened": "2026-11-23T11:55:00-05:00",
+   "closed": "2026-11-23T12:05:00-05:00",
+   "result": "SL",
+   "r": -1.0
   }
  ],
  "counter": 3,
  "snapshot": {
-  "updated": "2026-11-23T11:55:00-05:00",
+  "updated": "2026-11-23T12:50:00-05:00",
   "label": "XAUUSD 5m",
   "preset": "Scalping",
-  "price": 3672.60009765625,
-  "trend": "Bullish",
-  "score": 8.5,
-  "grade": "A",
-  "status": "Active",
+  "price": 3650.89990234375,
+  "trend": "Bearish",
+  "score": 6.5,
+  "grade": "B",
+  "status": "No Trade",
   "factors": [
    {
     "name": "Trend (EMA)",
@@ -77,7 +81,7 @@
    },
    {
     "name": "Higher-TF bias",
-    "ok": true,
+    "ok": false,
     "pts": 2
    },
    {
@@ -86,13 +90,13 @@
     "pts": 1
    },
    {
-    "name": "RSI 55.8",
+    "name": "RSI 38.5",
     "ok": true,
     "pts": 1
    },
    {
-    "name": "ADX 21.9",
-    "ok": true,
+    "name": "ADX 18.7",
+    "ok": false,
     "pts": 1.5
    },
    {
@@ -102,7 +106,7 @@
    },
    {
     "name": "MACD momentum",
-    "ok": false,
+    "ok": true,
     "pts": 1.5
    }
   ]
