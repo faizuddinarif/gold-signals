@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#070b17">
+<title>Gold Signals</title>
+<style>
+  :root{--bg:#070b17;--card:#0b1226;--line:rgba(45,212,191,.35);--buy:#2dd4bf;--sell:#f87171;--mut:#7c869c;--txt:#e6ebf5;--warn:#fbbf24}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--txt);font:15px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:max(14px,env(safe-area-inset-top)) 14px max(24px,env(safe-area-inset-bottom))}
+  .wrap{max-width:480px;margin:0 auto}
+  header{display:flex;justify-content:space-between;align-items:center;margin:6px 2px 14px}
+  h1{font-size:18px;margin:0;letter-spacing:.3px}
+  .sub{color:var(--mut);font-size:12px}
+  .price{font-size:20px;font-weight:700;text-align:right}
+  .banner{background:#2a1f05;border:1px solid #5b4510;color:var(--warn);border-radius:10px;padding:8px 12px;font-size:12px;margin-bottom:12px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:0 0 18px rgba(45,212,191,.12);margin-bottom:14px;overflow:hidden}
+  .card.sell{border-color:rgba(248,113,113,.35);box-shadow:0 0 18px rgba(248,113,113,.10)}
+  .top{display:flex;align-items:center;gap:8px;padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.06)}
+  .tag{font-size:11px;font-weight:700;letter-spacing:.8px;padding:4px 8px;border-radius:8px;background:#122033;color:var(--mut)}
+  .tag.id{background:rgba(45,212,191,.12);color:var(--buy)}
+  .sym{font-weight:700;font-size:17px}
+  .state{margin-left:auto}
+  .state.open{background:rgba(45,212,191,.15);color:var(--buy)}
+  .body{padding:14px 16px}
+  .row{display:flex;justify-content:space-between;align-items:flex-end}
+  .lbl{font-size:11px;letter-spacing:1px;color:var(--mut);text-transform:uppercase;margin-bottom:2px}
+  .dir{font-size:34px;font-weight:800;line-height:1}
+  .buy{color:var(--buy)} .sell-c{color:var(--sell)}
+  .conf{text-align:right}
+  .segs{display:flex;gap:4px;align-items:center;justify-content:flex-end}
+  .seg{width:22px;height:5px;border-radius:3px;background:#1a2238}
+  .seg.on.b{background:var(--buy)} .seg.on.s{background:var(--sell)}
+  .pill{display:inline-block;margin:14px 0;padding:7px 12px;border-radius:9px;border:1px solid var(--line);font-weight:700;font-size:14px}
+  .pill.neg{border-color:rgba(248,113,113,.5);color:var(--sell)} .pill.pos{color:var(--buy)}
+  .val{font-size:19px;font-weight:600}
+  .val.red{color:var(--sell)}
+  .tps{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:8px 0 14px}
+  .tp{border:1px solid rgba(255,255,255,.08);background:#0a0f1e;border-radius:11px;padding:8px 4px;text-align:center}
+  .tp.hit{border-color:var(--line);background:rgba(45,212,191,.07)}
+  .tp small{display:block;font-size:11px;color:var(--mut);margin-bottom:3px}
+  .tp.hit small{color:var(--buy)}
+  .tp b{font-size:13px}
+  .badge{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.7px;padding:5px 10px;border-radius:8px}
+  .risk-low{background:#0e2a22;color:#34d399}.risk-mod{background:#2a1f05;color:var(--warn)}.risk-high{background:#2c1212;color:var(--sell)}
+  .foot{display:flex;justify-content:space-between;color:var(--mut);font-size:12px;padding:12px 16px;border-top:1px solid rgba(255,255,255,.06)}
+  .fac{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:14px}
+  .fac:last-child{border:0}
+  .ok{color:var(--buy)} .no{color:#566078}
+  h2{font-size:12px;letter-spacing:1.2px;color:var(--mut);text-transform:uppercase;margin:20px 4px 10px}
+  .empty{color:var(--mut);text-align:center;padding:18px;font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div><h1>Gold Signals</h1><div class="sub" id="sub">loading…</div></div>
+    <div><div class="price" id="price">–</div><div class="sub" id="trend" style="text-align:right"></div></div>
+  </header>
+  <div id="banner"></div>
+  <div id="market"></div>
+  <h2>Active trade</h2>
+  <div id="active"></div>
+  <h2>History</h2>
+  <div id="history"></div>
+</div>
+
+<script>
+// Data file written by bot.py. With GitHub Pages leave as is.
+// For instant updates use: https://raw.githubusercontent.com/<user>/<repo>/main/signals.json
+const DATA_URL = "signals.json";
+const REFRESH_MS = 60000;
+
+const DEMO = (() => {
+  const now = Date.now(), iso = m => new Date(now - m*60000).toISOString();
+  return {
+    snapshot:{updated:iso(1),label:"XAUUSD 5m",preset:"Scalping",price:3556.4,trend:"Bearish",score:7.5,grade:"B",status:"TP2 ✓ — Trail",
+      factors:[{name:"Trend (EMA)",ok:true,pts:2},{name:"Higher-TF bias",ok:true,pts:2},{name:"Supertrend",ok:true,pts:1},{name:"RSI 41.2",ok:true,pts:1},{name:"ADX 24.8",ok:true,pts:1.5},{name:"Volatility",ok:false,pts:1},{name:"MACD momentum",ok:false,pts:1.5}]},
+    trade:{id:3,dir:-1,stage:2,entry:3560,sl:3553,sl0:3566,tp1:3553,tp2:3548,tp3:3540,score:7.5,grade:"B",atrRatio:1.1,opened:iso(43)},
+    history:[
+      {id:2,dir:1,stage:2,entry:3550,sl:3555,sl0:3542,tp1:3555,tp2:3560,tp3:3568,score:8,grade:"A",atrRatio:.9,opened:iso(300),closed:iso(240),result:"TP1 locked",r:0.62},
+      {id:1,dir:-1,stage:0,entry:3558,sl:3566,sl0:3566,tp1:3553,tp2:3548,tp3:3540,score:6.5,grade:"B",atrRatio:1.5,opened:iso(900),closed:iso(860),result:"SL",r:-1}
+    ]};
+})();
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const px = v => Number(v).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+const ago = iso => { const m = Math.max(0,Math.round((Date.now()-new Date(iso))/60000));
+  return m<60 ? m+"m ago" : m<1440 ? Math.floor(m/60)+"h "+(m%60)+"m ago" : Math.floor(m/1440)+"d ago"; };
+const risk = r => r<0.8 ? ["LOW RISK","risk-low"] : r<=1.3 ? ["MODERATE RISK","risk-mod"] : ["HIGH RISK","risk-high"];
+
+function tpBoxes(t, closed){
+  const hit3 = closed && t.result==="TP3";
+  const b = (label, price, on) => `<div class="tp ${on?"hit":""}"><small>${label}${on?" ✓":""}</small><b>${price}</b></div>`;
+  return `<div class="tps">
+    ${b("BE", t.stage>=1?"Secured":"—", t.stage>=1)}
+    ${b("TP1", px(t.tp1), t.stage>=1)}
+    ${b("TP2", px(t.tp2), t.stage>=2)}
+    ${b("TP3", px(t.tp3), hit3)}
+  </div>`;
+}
+
+function tradeCard(t, price, closed){
+  const buy = t.dir===1, c = buy?"buy":"sell-c", rk = risk(t.atrRatio||1);
+  const segs = Math.round(t.score/2);
+  const risk0 = Math.abs(t.entry - t.sl0);
+  let pill;
+  if (closed) {
+    const pos = t.r>=0;
+    pill = `<div class="pill ${pos?"pos":"neg"}">${esc(t.result)} · ${t.r>=0?"+":""}${t.r}R</div>`;
+  } else {
+    const pts = t.dir*(price - t.entry), r = pts/risk0;
+    pill = `<div class="pill ${pts>=0?"pos":"neg"}">RUNNING ${pts>=0?"+":""}${pts.toFixed(2)} pts (${r>=0?"+":""}${r.toFixed(2)}R)</div>`;
+  }
+  return `<div class="card ${buy?"":"sell"}">
+    <div class="top"><span class="tag id">#${t.id}</span><span class="tag">GOLD</span><span class="sym">XAUUSD</span>
+      <span class="tag state ${closed?"":"open"}">${closed?"CLOSED":"OPEN"}</span></div>
+    <div class="body">
+      <div class="row">
+        <div><div class="lbl">Direction</div><div class="dir ${c}">${buy?"BUY":"SELL"}</div></div>
+        <div class="conf"><div class="lbl">Confidence · Grade ${esc(t.grade)}</div>
+          <div class="segs">${[0,1,2,3,4].map(i=>`<span class="seg ${i<segs?"on "+(buy?"b":"s"):""}"></span>`).join("")}<b style="margin-left:6px">${Math.round(t.score*10)}%</b></div></div>
+      </div>
+      ${pill}
+      <div class="row" style="margin-bottom:14px">
+        <div><div class="lbl">Entry</div><div class="val">${px(t.entry)}</div></div>
+        <div style="text-align:right"><div class="lbl">Stop loss</div><div class="val red">${px(closed?t.sl0:t.sl)}</div></div>
+      </div>
+      <div class="lbl">Take profit targets</div>
+      ${tpBoxes(t, closed)}
+      <span class="badge ${rk[1]}">${rk[0]}</span>
+    </div>
+    <div class="foot"><span>${ago(closed?t.closed:t.opened).toUpperCase()}</span><span>${new Date(t.opened).toLocaleString([], {month:"short",day:"numeric",hour:"2-digit",minute:"2-digit"})}</span></div>
+  </div>`;
+}
+
+function marketCard(s){
+  const bull = s.trend==="Bullish";
+  return `<div class="card ${bull?"":"sell"}"><div class="body">
+    <div class="row"><div><div class="lbl">Market now · ${esc(s.preset)}</div><div class="dir ${bull?"buy":"sell-c"}" style="font-size:26px">${esc(s.trend)}</div></div>
+      <div class="conf"><div class="lbl">Score · Grade ${esc(s.grade)}</div><div class="val">${s.score} / 10</div></div></div>
+    <div class="lbl" style="margin-top:14px">Status: <span style="color:var(--txt)">${esc(s.status)}</span></div>
+    <div style="margin-top:8px">${s.factors.map(f=>`<div class="fac"><span>${esc(f.name)} <span class="sub">(${f.pts})</span></span><span class="${f.ok?"ok":"no"}">${f.ok?"✓":"✗"}</span></div>`).join("")}</div>
+  </div></div>`;
+}
+
+function render(d, demo){
+  $("banner").innerHTML = demo ? `<div class="banner">Showing DEMO data – couldn't load ${esc(DATA_URL)}. Host this page with the bot's repo (GitHub Pages).</div>` : "";
+  const s = d.snapshot;
+  if (s){
+    $("sub").textContent = `${s.label} · updated ${ago(s.updated)}`;
+    $("price").textContent = px(s.price);
+    $("trend").textContent = s.trend;
+    $("market").innerHTML = marketCard(s);
+  }
+  $("active").innerHTML = d.trade ? tradeCard(d.trade, s ? s.price : d.trade.entry, false)
+    : `<div class="card"><div class="empty">No active trade – waiting for the next setup.</div></div>`;
+  const h = (d.history||[]).slice().reverse();
+  $("history").innerHTML = h.length ? h.map(t=>tradeCard(t, 0, true)).join("") : `<div class="card"><div class="empty">No closed trades yet.</div></div>`;
+}
+
+async function load(){
+  try{
+    const r = await fetch(DATA_URL + "?t=" + Date.now(), {cache:"no-store"});
+    if(!r.ok) throw new Error(r.status);
+    render(await r.json(), false);
+  }catch(e){ render(DEMO, true); }
+}
+load(); setInterval(load, REFRESH_MS);
+</script>
+</body>
+</html>
