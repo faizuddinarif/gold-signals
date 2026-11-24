@@ -1,5 +1,5 @@
 {
- "last_ts": "2026-11-24T01:20:00-05:00",
+ "last_ts": "2026-11-24T02:45:00-05:00",
  "trade": null,
  "history": [
   {
@@ -85,13 +85,13 @@
  ],
  "counter": 4,
  "snapshot": {
-  "updated": "2026-11-24T01:20:00-05:00",
+  "updated": "2026-11-24T02:45:00-05:00",
   "label": "XAUUSD 5m",
   "preset": "Scalping",
-  "price": 3618.89990234375,
+  "price": 3622.300048828125,
   "trend": "Bearish",
-  "score": 10.0,
-  "grade": "A",
+  "score": 7.0,
+  "grade": "B",
   "status": "No Trade",
   "factors": [
    {
@@ -110,13 +110,13 @@
     "pts": 1
    },
    {
-    "name": "RSI 34.4",
+    "name": "RSI 47.6",
     "ok": true,
     "pts": 1
    },
    {
-    "name": "ADX 20.9",
-    "ok": true,
+    "name": "ADX 16.8",
+    "ok": false,
     "pts": 1.5
    },
    {
@@ -126,7 +126,7 @@
    },
    {
     "name": "MACD momentum",
-    "ok": true,
+    "ok": false,
     "pts": 1.5
    }
   ]
