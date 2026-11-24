@@ -1,5 +1,5 @@
 {
- "last_ts": "2026-11-24T16:50:00-05:00",
+ "last_ts": "2026-11-24T18:00:00-05:00",
  "trade": null,
  "history": [
   {
@@ -85,12 +85,12 @@
  ],
  "counter": 4,
  "snapshot": {
-  "updated": "2026-11-24T16:50:00-05:00",
+  "updated": "2026-11-24T18:00:00-05:00",
   "label": "XAUUSD 5m",
   "preset": "Scalping",
-  "price": 3553.10009765625,
-  "trend": "Bearish",
-  "score": 6.0,
+  "price": 3557.800048828125,
+  "trend": "Bullish",
+  "score": 7.0,
   "grade": "B",
   "status": "No Trade",
   "factors": [
@@ -101,22 +101,22 @@
    },
    {
     "name": "Higher-TF bias",
-    "ok": true,
+    "ok": false,
     "pts": 2
    },
    {
     "name": "Supertrend",
+    "ok": false,
+    "pts": 1
+   },
+   {
+    "name": "RSI 60.7",
     "ok": true,
     "pts": 1
    },
    {
-    "name": "RSI 50.3",
-    "ok": false,
-    "pts": 1
-   },
-   {
-    "name": "ADX 18.3",
-    "ok": false,
+    "name": "ADX 20.6",
+    "ok": true,
     "pts": 1.5
    },
    {
@@ -126,7 +126,7 @@
    },
    {
     "name": "MACD momentum",
-    "ok": false,
+    "ok": true,
     "pts": 1.5
    }
   ]
