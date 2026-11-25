@@ -1,5 +1,5 @@
 {
- "last_ts": "2026-11-24T18:00:00-05:00",
+ "last_ts": "2026-11-24T19:50:00-05:00",
  "trade": null,
  "history": [
   {
@@ -81,16 +81,36 @@
    "closed": "2026-11-23T19:55:00-05:00",
    "result": "TP3",
    "r": 2.5
+  },
+  {
+   "dir": 1,
+   "stage": 0,
+   "entry": 3560.89990234375,
+   "sl": 3556.4717505484696,
+   "tp1": 3564.590028839817,
+   "tp2": 3568.2801553358836,
+   "tp3": 3571.9702818319506,
+   "score": 8.0,
+   "grade": "A",
+   "atrRatio": 0.811898035721205,
+   "rr": 2.5,
+   "time": "2026-11-24 18:10 EST",
+   "id": 5,
+   "sl0": 3556.4717505484696,
+   "opened": "2026-11-24T18:10:00-05:00",
+   "closed": "2026-11-24T18:20:00-05:00",
+   "result": "SL",
+   "r": -1.0
   }
  ],
- "counter": 4,
+ "counter": 5,
  "snapshot": {
-  "updated": "2026-11-24T18:00:00-05:00",
+  "updated": "2026-11-24T19:50:00-05:00",
   "label": "XAUUSD 5m",
   "preset": "Scalping",
-  "price": 3557.800048828125,
-  "trend": "Bullish",
-  "score": 7.0,
+  "price": 3554.0,
+  "trend": "Bearish",
+  "score": 6.0,
   "grade": "B",
   "status": "No Trade",
   "factors": [
@@ -101,22 +121,22 @@
    },
    {
     "name": "Higher-TF bias",
-    "ok": false,
+    "ok": true,
     "pts": 2
    },
    {
     "name": "Supertrend",
+    "ok": true,
+    "pts": 1
+   },
+   {
+    "name": "RSI 54.6",
     "ok": false,
     "pts": 1
    },
    {
-    "name": "RSI 60.7",
-    "ok": true,
-    "pts": 1
-   },
-   {
-    "name": "ADX 20.6",
-    "ok": true,
+    "name": "ADX 17.6",
+    "ok": false,
     "pts": 1.5
    },
    {
@@ -126,7 +146,7 @@
    },
    {
     "name": "MACD momentum",
-    "ok": true,
+    "ok": false,
     "pts": 1.5
    }
   ]
