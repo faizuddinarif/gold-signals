@@ -1,5 +1,5 @@
 {
- "last_ts": "2026-11-25T16:55:00-05:00",
+ "last_ts": "2026-11-25T18:45:00-05:00",
  "trade": null,
  "history": [
   {
@@ -105,10 +105,10 @@
  ],
  "counter": 5,
  "snapshot": {
-  "updated": "2026-11-25T16:55:00-05:00",
+  "updated": "2026-11-25T18:45:00-05:00",
   "label": "XAUUSD 5m",
   "preset": "Scalping",
-  "price": 3617.800048828125,
+  "price": 3607.199951171875,
   "trend": "Bullish",
   "score": 8.5,
   "grade": "A",
@@ -130,12 +130,12 @@
     "pts": 1
    },
    {
-    "name": "RSI 70.7",
+    "name": "RSI 55.4",
     "ok": true,
     "pts": 1
    },
    {
-    "name": "ADX 55.6",
+    "name": "ADX 40.5",
     "ok": true,
     "pts": 1.5
    },
